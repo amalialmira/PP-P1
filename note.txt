@@ -1,0 +1,13 @@
+npx sequelize-cli model:create --name "User" --attributes username:string,email:string,password:string,role:string
+
+
+npx sequelize-cli model:create --name "Category" --attributes name:string
+
+npx sequelize-cli model:create --name "Profile" --attributes firstName:string,lastName:string,age:integer
+
+npx sequelize-cli model:create --name "Course" --attributes title:string,description:string,CategoryId:integer
+
+npx sequelize-cli model:create --name "UserCourse" --attributes UserId:integer,CourseId:integer
+
+npx sequelize-cli seed:create --name "SeedCategory"
+npx sequelize-cli seed:create --name "SeedCourse"
