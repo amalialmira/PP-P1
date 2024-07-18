@@ -1,25 +1,56 @@
-[{
-    "title": "non ligula pellentesque",
-    "description": "elit ac nulla sed vel enim",
-    "CategoryId": 1
-  }, {
-    "title": "vestibulum",
-    "description": "metus sapien ut nunc vestibulum ante ipsum primis in faucibus",
-    "CategoryId": 1
-  }, {
-    "title": "donec odio",
-    "description": "penatibus et magnis dis parturient",
-    "CategoryId": 2
-  }, {
-    "title": "dolor",
-    "description": "pharetra magna ac consequat metus",
-    "CategoryId": 3
-  }, {
-    "title": "habitasse platea",
-    "description": "accumsan felis ut at dolor quis odio consequat varius integer",
-    "CategoryId": 3
-  }, {
-    "title": "est phasellus sit amet erat",
-    "description": "volutpat erat quisque erat eros viverra",
-    "CategoryId": 2
-  }]
+[
+  {
+    "title": "Learn to Read Arabic 1",
+    "description": "Introduction to Arabic letters and reading basics",
+    "CategoryId": 1,
+    "duration": 1
+  },
+  {
+    "title": "Arabic Numbers and Basics",
+    "description": "Learn to count and understand basic numbers in Arabic",
+    "CategoryId": 1,
+    "duration": 1
+  },
+  {
+    "title": "Introduction to Arabic Letters",
+    "description": "Master the Arabic alphabet and foundational pronunciation",
+    "CategoryId": 1,
+    "duration": 2
+  },
+  {
+    "title": "Arabic Basics 2",
+    "description": "Build on your basic Arabic skills with more vocabulary and grammar",
+    "CategoryId": 2,
+    "duration": 2
+  },
+  {
+    "title": "Arabic Conversations",
+    "description": "Practice everyday conversations and improve speaking skills",
+    "CategoryId": 2,
+    "duration": 3
+  },
+  {
+    "title": "Intermediate Arabic Skills",
+    "description": "Enhance your Arabic proficiency with intermediate-level lessons",
+    "CategoryId": 2,
+    "duration": 2
+  },
+  {
+    "title": "Arabic Fluency",
+    "description": "Achieve fluency with advanced vocabulary and complex sentences",
+    "CategoryId": 3,
+    "duration": 3
+  },
+  {
+    "title": "Advanced Arabic Proficiency",
+    "description": "Develop advanced reading, writing, and speaking skills",
+    "CategoryId": 3,
+    "duration": 2
+  },
+  {
+    "title": "Arabic Mastery",
+    "description": "Master the Arabic language with expert-level instruction",
+    "CategoryId": 3,
+    "duration": 3
+  }
+]

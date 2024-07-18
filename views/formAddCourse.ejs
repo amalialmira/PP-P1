@@ -6,29 +6,40 @@
     <title>Add Course</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body style="background-color: #7EAECD;" >
-    <%- include('_navbar') %>
+<body style="background-color: #7CA66E;" >
+    <%- include('_navbarteacher') %>
     <main id="content">
         <div class="max-w-[85rem] min-h-[75rem] mx-auto pt-12 pb-10 px-4 sm:px-6 lg:px-8 md:pt-24">
-          <!-- your content goes here ... -->
-          <form class="max-w-sm mx-auto">
+            <!-- your content goes here ... -->
+            <h1 style="text-align: center;" class="font-bold text-4xl mb-8">Add Course</h1>
+          <form method="post" action="/courses/add" style="padding: 20px;" class="max-w-sm mx-auto rounded-lg bg-[#FAEFDC] border-2 border-black ">
               <div class="mb-5">
-              <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Your email</label>
-              <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@flowbite.com" required />
+              <label for="title" class="block mb-2 text-sm font-medium text-gray-900">Title</label>
+              <input name="title" type="text" id="title" class="bg-gray-50 border-2 border-black text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
               </div>
               <div class="mb-5">
-              <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Your password</label>
-              <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
+              <label for="description" class="block mb-2 text-sm font-medium text-gray-900 ">Description</label>
+              <textarea name="description" id="message" rows="4" class="border-2 border-black block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="write course description here..."></textarea>
               </div>
-              <div class="flex items-start mb-5">
-              <div class="flex items-center h-5">
-                  <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300" required />
-              </div>
-              <label for="remember" class="ms-2 text-sm font-medium text-gray-900 ">Remember me</label>
-              </div>
-              <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Submit</button>
-          </form>
+              <div class="mb-5">
+                <label for="imageURL" class="block mb-2 text-sm font-medium text-gray-900">Course Image</label>
+                <input name="imageURL" type="text" id="title" class="bg-gray-50 border-2 border-black text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="username" required />
+                </div>
+                <div class="mb-5">
+                    <label for="category" class="block mb-2 text-sm font-medium text-gray-900">Category Level</label>
+                    <select name="CategoryId" id="category" class="bg-gray-50 border-2 border-black text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        <option selected disabled>-- select level --</option>
+                        <% cat.forEach(el => { %>
+                            <option value="<%= el.id %>"><%= el.name %></option>
+                            <% }) %>
+                        </select>
+                </div>
+     
 
+  
+            
+              <button type="submit" class="text-black bg-[#E38054] hover:bg-[#7EAECD] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center border-2 border-black">Add</button>
+          </form>
           
         </div>
       </main>

@@ -16,13 +16,71 @@ module.exports = (sequelize, DataTypes) => {
       User.belongsToMany(models.Course, {through : models.UserCourse})
       User.hasMany(models.UserCourse)
     }
+    get fullName(){
+      return `${this.firstName} ${this.lastName}`
+    }
   }
   User.init({
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
-    username: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: true,
+        notEmpty: {
+          msg: "first name is required"
+        }
+      }
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: true,
+        notEmpty: {
+          msg: "last name is required"
+        }
+      }
+    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        notNull: true,
+        notEmpty: {
+          msg: "first name is required"
+        }
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        notNull: true,
+        notEmpty: {
+          msg: "first name is required"
+        },
+        // isEmail: {
+        //   msg: "invalid email input"
+        // }
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        notNull: true,
+        notEmpty: {
+          msg: "first name is required"
+        },
+        // len: {
+        //   args: [8, 50],
+        //   msg: 'password minimum length is 8'
+        // }
+      }
+    },
     role: DataTypes.STRING,
     dateOfBirth: DataTypes.DATE
   }, {
