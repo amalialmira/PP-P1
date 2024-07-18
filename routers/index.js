@@ -6,25 +6,48 @@ const Controller = require('../controllers/controller')
 router.get('/', Controller.home) // ini untuk home
 
 
-router.get('/register')
-router.post('/register')
+router.get('/register', Controller.getRegForm)
+router.post('/register', Controller.postReg)
 
-router.get('/studentLogin')
-router.post('/studentLogin')
-router.get('students/:id')
-router.get('students/:id/edit')
-router.post('students/:id/edit')
+router.get('/login', Controller.getLoginForm)
+router.post('/login', Controller.postLogin)
 
-router.get('/teacherLogin')
-router.post('/teacherLogin')
-router.get('teachers/:id')
-router.get('teachers/:id/edit')
-router.post('teachers/:id/edit')
+router.use(function (req, res, next){
+    if (!req.session.userId){
+        const error = 'Please log in first!'
+        res.redirect(`/login?error=${error}`)
+    }
+    else {
+        next()
+    }
+}) 
+
+const isStudent = function (req, res, next){
+    if (req.session.role === "Student"){
+        next()
+    }
+}
+
+const isTeacher = function (req, res, next){
+    if (req.session.role === "Teacher"){
+        next()
+    }
+}
+
+router.get('/students', isStudent, Controller)
+router.get('students/:id/edit', isStudent, Controller)
+router.post('students/:id/edit', isStudent, Controller)
+
+router.get('teachers/:id', isTeacher, Controller)
+router.get('teachers/:id/edit', isTeacher, Controller)
+router.post('teachers/:id/edit', isTeacher, Controller)
 
 router.get("/courses")
 
-router.get("/addCourse")
-router.post("/addCourse")
+router.get("/courses/add", isTeacher, Controller.getCourseForm)
+router.post("/courses/add", isTeacher, Controller)
+
+router.get('/logout', Controller.getLogOut)
 
 
 
