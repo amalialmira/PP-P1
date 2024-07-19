@@ -2,6 +2,8 @@ const { Model } = require('sequelize')
 const {User, Course, Category, Profile, UserCourse} = require('../models')
 const bcrypt = require('bcryptjs')
 const { Op } = require("sequelize")
+const getJoinDate = require('../helpers/getJoinDate')
+const nodemailer = require('nodemailer');
 
 class Controller {
     static async home(req, res){
@@ -29,7 +31,6 @@ class Controller {
     static async getRegForm(req,res){
         try {
             const{errors} = req.query
-            // console.log(errors);
             res.render('formRegist', {errors})
         } catch (error) {
             res.send(error.message)
@@ -39,22 +40,55 @@ class Controller {
         try {
             const {username,firstName, lastName, email, password, dateOfBirth, role} = req.body
             
-            let newAge = new Date().getFullYear - new Date(dateOfBirth).getFullYear
+            let newAge = new Date(dateOfBirth)
 
-            User.create({username,firstName, lastName, email, password, dateOfBirth, role})
-            Profile.create({firstName,lastName,age: dateOfBirth})
+            await User.create({username,firstName, lastName, email, password, dateOfBirth, role})
+            let dataUser = await User.findOne({
+                where: {username}
+            })
+           
+            await Profile.create({firstName,lastName,age: newAge, UserId: dataUser.id})
+            
+            let transporter = nodemailer.createTransport({
+                host: 'smtp.office365.com',
+                port: 587,
+                secure: false, // true for 465, false for other ports
+                auth: {
+                user: 'alifbaaeducation@outlook.com', // Your Outlook email
+                pass: 'azo0oz100' // Your Outlook password
+                }
+            });
+            
+            let mailOptions = (email) => {
+                const option ={
+                    from: 'alifbaaeducation@outlook.com', 
+                    to: email , 
+                    subject: 'Subject of your email', 
+                    text: 'اهلا وسهلا! your accout is set, get started to master arabic with AlifBaa', 
+                    
+                }
+                transporter.sendMail(option , (error, info) => {
+                    if (error) {
+                    return console.log(error);
+                    }
+                    console.log('Message sent: %s', info.messageId);
+                });
+            };
+            
+            mailOptions(email)
+            
             res.redirect('/login')
         } catch (error) {
-            // console.log(error);
-            // if(error.name === 'SequelizeValidationError' || error.name === 'SequelizeUniqueConstraintError'){
-            //     error = error.errors.map(el => {
+            
+            if(error.name === 'SequelizeValidationError' || error.name === 'SequelizeUniqueConstraintError'){
+                error = error.errors.map(el => {
 
-            //         return el.message
-            //     })
-            //     res.redirect(`/register?errors=${error}`)
-            // } else {
+                    return el.message
+                })
+                res.redirect(`/register?errors=${error}`)
+            } else {
                 res.send(error.message)
-            // }
+            }
         }
     }
     static async getLoginForm(req,res){
@@ -127,7 +161,7 @@ class Controller {
             res.render("teacherHome",{userData})
 
         } catch (error) {
-            
+            res.send(error.message)
         }
     }
 
@@ -135,37 +169,53 @@ class Controller {
         try {
             const {id} = req.params
             const{search} = req.query
-            let userData
-            if (search){
-                userData = await User.findByPk(id, {
-                    include: {
-                        model: Course,
-                        where: {
-                            title: {
-                                [Op.iLike]: `%${search}%`
-                            }
-                        },
-                        include: Category,
-                    }  
-                })
-            } else {
-                userData = await User.findByPk(id, {
-                    include: {
-                        model: Course,
-                        include: Category
-                        }
-                })
-            }
-            res.render('studentProfile', {userData})
+            let userData = await User.searchTitle(id, search)
+            let profiles = await Profile.findOne({
+                where: {
+                    UserId: userData.id
+                }
+            })
+            console.log(profiles.umur);
+            res.render('studentProfile', {userData, getJoinDate, profiles})
         } catch (error) {
             res.send(error.message)
         }
     }
     static async editStudent (req, res){
-
+        try {
+            const {id} = req.params
+            let userData = await User.findByPk(id)
+            res.render('formEditStudent', {userData})
+        }   
+         catch (error) {
+            res.send(error.message)
+        }
     }
     static async postEditStudent (req, res){
-
+        const {username, firstName, lastName, email, password} = req.body
+        const {id} = req.params
+        await User.update({username, firstName, lastName, email, password},{
+            where: {id}
+        })
+        res.redirect(`/students/${id}`)
+    }
+    static async editTeacher (req, res){
+        try {
+            const {id} = req.params
+            let userData = await User.findByPk(id)
+            res.render('formEditTeacher', {userData})
+        }   
+         catch (error) {
+            res.send(error.message)
+        }
+    }
+    static async postEditTeacher (req, res){
+        const {username, firstName, lastName, email, password} = req.body
+        const {id} = req.params
+        await User.update({username, firstName, lastName, email, password},{
+            where: {id}
+        })
+        res.redirect(`/teachers/${id}`)
     }
     static async addStudentCourse (req, res){
         try {
@@ -176,8 +226,16 @@ class Controller {
             res.send(error.message)
         }
     }
-    static async postStudentCourse (req, res){
+    static async readCourse (req, res){
+        try {
+            const{UserId, CourseId} = req.params
+            let userData = await User.findByPk(UserId)
+            let course = await Course.findByPk(CourseId)
+            res.render('materials', {course, userData})
 
+        } catch (error) {
+            res.send(error.message)
+        }
     }
     static async deleteCourse (req, res){
         try {
@@ -191,11 +249,11 @@ class Controller {
         }
     }
 
-
     static async teacherProfile(req,res){
         try {
-
-            res.render('teacherProfile')
+            let {id} = req.params
+            let userData = await User.findByPk(id)
+            res.render('teacherProfile', {userData, getJoinDate})
         } catch (error) {
             res.send(error.message)
         }
@@ -203,8 +261,10 @@ class Controller {
 
     static async getCourseForm(req,res){
         try {
+            let {id} = req.params
+            let userData = await User.findByPk(id)
             let cat = await Category.findAll()
-            res.render('formAddCourse', {cat})
+            res.render('formAddCourse', {cat, userData})
         } catch (error) {
             res.send()
         }
@@ -216,7 +276,7 @@ class Controller {
             const {title, description, imageURL, CategoryId} = req.body
     
             await Course.create({title, description, imageURL, CategoryId})
-            res.redirect('/')
+            res.redirect('/') //redirect ke home teacher
         } catch (error) {
             
         }

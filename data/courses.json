@@ -3,54 +3,71 @@
     "title": "Learn to Read Arabic 1",
     "description": "Introduction to Arabic letters and reading basics",
     "CategoryId": 1,
-    "duration": 1
+    "duration": 1,
+    "imageURL":"https://i.ibb.co.com/tLyGvkr/1.png"
   },
   {
     "title": "Arabic Numbers and Basics",
     "description": "Learn to count and understand basic numbers in Arabic",
     "CategoryId": 1,
-    "duration": 1
+    "duration": 1,
+    "imageURL": "https://i.ibb.co.com/jvYHWjw/2.png"
+
   },
   {
     "title": "Introduction to Arabic Letters",
     "description": "Master the Arabic alphabet and foundational pronunciation",
     "CategoryId": 1,
-    "duration": 2
+    "duration": 2,
+    "imageURL": "https://i.ibb.co.com/W63BGXM/3.png"
+
   },
   {
     "title": "Arabic Basics 2",
     "description": "Build on your basic Arabic skills with more vocabulary and grammar",
     "CategoryId": 2,
-    "duration": 2
+    "duration": 2,
+    "imageURL": "https://i.ibb.co.com/dJX5NhX/4.png"
+
   },
   {
     "title": "Arabic Conversations",
     "description": "Practice everyday conversations and improve speaking skills",
     "CategoryId": 2,
-    "duration": 3
+    "duration": 3,
+    "imageURL": "https://i.ibb.co.com/wWJm0Zf/5.png"
+
   },
   {
     "title": "Intermediate Arabic Skills",
     "description": "Enhance your Arabic proficiency with intermediate-level lessons",
     "CategoryId": 2,
-    "duration": 2
+    "duration": 2,
+    "imageURL": "https://i.ibb.co.com/K94MgMZ/6.png"
+
   },
   {
     "title": "Arabic Fluency",
     "description": "Achieve fluency with advanced vocabulary and complex sentences",
     "CategoryId": 3,
-    "duration": 3
+    "duration": 3,
+    "imageURL": "https://i.ibb.co.com/1Rb8MCK/7.png"
+
   },
   {
     "title": "Advanced Arabic Proficiency",
     "description": "Develop advanced reading, writing, and speaking skills",
     "CategoryId": 3,
-    "duration": 2
+    "duration": 2,
+    "imageURL": "https://i.ibb.co.com/72Jd80x/8.png"
+
+
   },
   {
     "title": "Arabic Mastery",
     "description": "Master the Arabic language with expert-level instruction",
     "CategoryId": 3,
-    "duration": 3
+    "duration": 3,
+    "imageURL": "https://i.ibb.co.com/Zm5BsHs/9.png"
   }
 ]

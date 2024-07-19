@@ -35,12 +35,13 @@ const isTeacher = function (req, res, next){
 }
 
 router.get("/home/students/:id",Controller.homeStudent) // ok
-
 router.get('/students/:id', isStudent, Controller.studentProfile)
 router.get('/students/:id/edit', isStudent, Controller.editStudent)
-router.get('/students/:id/edit', isStudent, Controller.postEditStudent)
+router.post('/students/:id/edit', isStudent, Controller.postEditStudent)
 router.get('/students/:UserId/add/:CourseId', isStudent, Controller.addStudentCourse)
-router.post('/students/:UserId/add/:CourseId', isStudent, Controller.postStudentCourse)
+router.get('/students/:UserId/read/:CourseId', isStudent, Controller.readCourse)
+
+
 
 router.get('/students/:UserId/delete/:CourseId', isStudent, Controller.deleteCourse)
 
@@ -48,12 +49,12 @@ router.get('/students/:UserId/delete/:CourseId', isStudent, Controller.deleteCou
 router.get("/home/teachers/:id",Controller.homeTeacher)  // ok
             
 router.get('/teachers/:id', isTeacher, Controller.teacherProfile)
-router.get('/teachers/:id/edit', isTeacher, Controller.home)
+router.get('/teachers/:id/edit', isTeacher, Controller.editTeacher)
 router.post('/teachers/:id/edit', isTeacher, Controller.home)
 
 
-router.get("/courses/add", isTeacher, Controller.getCourseForm) // ok
-router.post("/courses/add", isTeacher, Controller.postCourse) // ok
+router.get("/teachers/:id/courses/add", isTeacher, Controller.getCourseForm) // ok
+router.post("/teachers/:id/courses/add", isTeacher, Controller.postCourse) // ok
 
 router.get('/logout', Controller.getLogOut) // ok
 

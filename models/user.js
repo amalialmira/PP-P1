@@ -3,6 +3,7 @@ const {
   Model
 } = require('sequelize');
 const bcrypt = require('bcryptjs')
+const { Op } = require("sequelize")
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -18,6 +19,31 @@ module.exports = (sequelize, DataTypes) => {
     }
     get fullName(){
       return `${this.firstName} ${this.lastName}`
+    }
+    
+    static async searchTitle(id, search){
+      let userData
+            if (search){
+                userData = await User.findByPk(id, {
+                    include: {
+                        model: sequelize.models.Course,
+                        where: {
+                            title: {
+                                [Op.iLike]: `%${search}%`
+                            }
+                        },
+                        include: sequelize.models.Category,
+                    }  
+                })
+            } else {
+                userData = await User.findByPk(id, {
+                    include: {
+                        model: sequelize.models.Course,
+                        include: sequelize.models.Category
+                        }
+                })
+            }
+            return userData
     }
   }
   User.init({
@@ -61,9 +87,9 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {
           msg: "first name is required"
         },
-        // isEmail: {
-        //   msg: "invalid email input"
-        // }
+        isEmail: {
+          msg: "invalid email input"
+        }
       }
     },
     password: {
@@ -75,10 +101,10 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {
           msg: "first name is required"
         },
-        // len: {
-        //   args: [8, 50],
-        //   msg: 'password minimum length is 8'
-        // }
+        len: {
+          args: [8],
+          msg: 'password minimum length is 8'
+        }
       }
     },
     role: DataTypes.STRING,

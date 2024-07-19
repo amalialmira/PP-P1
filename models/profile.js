@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Profile.belongsTo(models.User)
     }
-    get age(){
+    get umur(){
       return new Date().getFullYear - new Date(this.age).getFullYear
     }
 

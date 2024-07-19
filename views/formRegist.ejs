@@ -12,9 +12,13 @@
         <div class="max-w-[85rem] min-h-[75rem] mx-auto pt-12 pb-10 px-4 sm:px-6 lg:px-8 md:pt-24">
           <!-- your content goes here ... -->
           <h1 style="text-align: center;" class="font-bold mb-8 text-4xl">Register Now</h1>
-          <% if (errors){ %>
-            <p style="color: red;" class="text-sm"><%= errors.split(",")%></p>
-        <% } %>
+          <div style="text-align: center;" class="mb-5">
+              <% if (errors){ %>
+                <h1>Error!</h1>
+                <p style="color: white;" class="text-sm"><%= errors.split(",")%></p>
+            <% } %>
+
+          </div>
           <form method="post" action="/register" style="padding: 20px;" class="max-w-sm mx-auto rounded-lg bg-[#FAEFDC] border-2 border-black ">
               <div class="mb-5">
               <label for="username" class="block mb-2 text-sm font-medium text-gray-900">Username</label>

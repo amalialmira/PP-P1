@@ -25,8 +25,8 @@
             <div class="mb-10 ">
                 <div class="text-3xl font-semibold" ><%= userData.fullName %></div>
                 <div class="text-xl" ><%= userData.username %></div>
-                <div class="text-lg mb-5 ">Joined in August 2014</div>
-                <a href="/students/<%= userData.id %>/edit" type="submit" class=" text-black bg-[#EDDFC7] hover:bg-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center border-2 border-black">Edit</a>
+                <div class="text-lg mb-5 ">Joined in: <%= getJoinDate(userData.createdAt) %></div>
+                <a href="/teachers/<%= userData.id %>/edit" type="submit" class=" text-black bg-[#EDDFC7] hover:bg-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center border-2 border-black">Edit</a>
             </div>
 
         </div>

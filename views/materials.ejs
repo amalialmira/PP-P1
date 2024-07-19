@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body style="background-color: #E38054;;">
+    <%- include('_navbarloggedin') %>
+    <!-- ========== MAIN CONTENT 2 ========== -->
+  <main id="courses" style="background-color: #E38054;" id="content">
+    <div class="max-w-[85rem] min-h-[75rem] mx-auto pt-12 pb-10 px-4 sm:px-6 lg:px-8 md:pt-24">
+      <!-- your content goes here ... -->
+    <div>
+        <img src="<%= course.imageURL %>" alt="">
+        <h1 style="text-align: center;" class="text-4xl font-bold my-9 "><%= course.title%></h1>
+        <p><%= course.description %></p>
+    </div>
+
+    </div>
+  </main>
+</body>
+</html>
