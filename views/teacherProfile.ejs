@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body style="background-color: #7EAECD;">
+    <%- include('_navbarteacher') %>
+         <!-- ========== MAIN CONTENT 1 ========== -->
+  <main style="background-color: #7EAECD;" id="content">
+    <div class="max-w-[100vw] min-h-[100vh] mx-auto pt-12 pb-10 px-4 sm:px-6 lg:px-8 md:pt-24">
+      <!-- your content goes here ... -->
+        <div class="flex items-center justify-center">
+            <h1 class="text-4xl font-bold mb-10">Teacher Profile</h1>
+        </div>
+        <div>
+        
+        <!-- profile -->
+        <div style="text-align: center;">
+            <div style="width: 200px; height: 200px; margin-left: 41vw;" class="overflow-hidden bg-gray-100 rounded-full border-2 border-black mb-8">
+                <img src="https://png.pngtree.com/png-vector/20190114/ourlarge/pngtree-personal-development-icon-png-image_313361.jpg" alt="">
+            </div>
+            <div class="mb-10 ">
+                <div class="text-3xl font-semibold" ><%= userData.fullName %></div>
+                <div class="text-xl" ><%= userData.username %></div>
+                <div class="text-lg mb-5 ">Joined in: <%= getJoinDate(userData.createdAt) %></div>
+                <a href="/teachers/<%= userData.id %>/edit" type="submit" class=" text-black bg-[#EDDFC7] hover:bg-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center border-2 border-black">Edit</a>
+            </div>
+
+        </div>
+            
+
+        </div>
+      </div>
+      
+    </div>
+  </main>
+</body>
+</html>

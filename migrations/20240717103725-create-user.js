@@ -9,6 +9,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      firstName: {
+        type: Sequelize.STRING
+      },
+      lastName: {
+        type: Sequelize.STRING
+      },
       username: {
         type: Sequelize.STRING
       },
@@ -20,6 +26,9 @@ module.exports = {
       },
       role: {
         type: Sequelize.STRING
+      },
+      dateOfBirth: {
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,

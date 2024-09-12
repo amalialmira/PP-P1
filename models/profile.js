@@ -13,11 +13,15 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Profile.belongsTo(models.User)
     }
+    get umur(){
+      return new Date().getFullYear - new Date(this.age).getFullYear
+    }
+
   }
   Profile.init({
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
-    age: DataTypes.INTEGER
+    age: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Profile',

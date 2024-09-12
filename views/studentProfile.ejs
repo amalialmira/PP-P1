@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body style="background-color: #E38054;">
+    <%- include('_navbarloggedin') %>
+         <!-- ========== MAIN CONTENT 1 ========== -->
+  <main style="background-color: #E38054;" id="content">
+    <div class="max-w-[100vw] min-h-[100vh] mx-auto pt-12 pb-10 px-4 sm:px-6 lg:px-8 md:pt-24">
+      <!-- your content goes here ... -->
+        <div class="flex items-center justify-center">
+            <h1 class="text-4xl font-bold mb-10">Student Profile</h1>
+        </div>
+        <div>
+        
+        <!-- profile -->
+        <div style="text-align: center;">
+            <div style="width: 200px; height: 200px; margin-left: 41vw;" class="overflow-hidden bg-gray-100 rounded-full border-2 border-black mb-8">
+                <img src="https://png.pngtree.com/png-vector/20190114/ourlarge/pngtree-personal-development-icon-png-image_313361.jpg" alt="">
+            </div>
+            <div class="mb-10 ">
+                <div class="text-3xl font-semibold" ><%= userData.fullName %></div>
+                <div class="text-xl" ><%= userData.username %></div>
+                <div class="text-lg mb-5 ">Joined in <%= getJoinDate(userData.createdAt) %></div>
+                <a href="/students/<%= userData.id %>/edit" type="submit" class=" text-black bg-[#EDDFC7] hover:bg-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center border-2 border-black">Edit</a>
+            </div>
+        </div>
+
+        <!-- SEARCH -->
+
+        <form class="max-w-md mx-auto" method="get" action="/students/<%= userData.id %>">   
+            <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                </div>
+                <input name="search" type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border-2 border-black rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Search course by title ..." />
+                <button type="submit" class="text-black absolute end-2.5 bottom-2.5 bg-[#7EAECD] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 border-2 border-black">Search</button>
+            </div>
+        </form>
+
+            
+        <!-- TABLE -->
+        <h1 class="mb-5 text-2xl">My Courses:</h1>
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-black">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500  ">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            No.
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Course Name
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Course Level
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% userData.Courses.forEach((el, idx) =>{ %>
+                    <tr class="bg-white border-b ">
+                            <td class="px-6 py-4">
+                                <%= idx + 1 %>
+                            </td>
+                            <td class="px-6 py-4">
+                                <%= el.title %>
+                            </td>
+                            <td class="px-6 py-4">
+                                <%= el.Category.name %>
+                            </td>
+                            <td class="px-6 py-4">
+                                <a href="/students/<%= userData.id %>/read/<%= el.id %>" type="submit" class="text-black bg-[#7CA66E] hover:bg-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center border-2 border-black mr-2">Read</a>
+                                <a href="/students/<%= userData.id %>/delete/<%= el.id %>" type="submit" class="text-black bg-[#E38054] hover:bg-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center border-2 border-black">Delete</a>
+                            </td>      
+                        </tr>
+                        <%}) %>
+                </tbody>
+            </table>
+        </div>
+
+        </div>
+      </div>
+      
+    </div>
+  </main>
+</body>
+</html>

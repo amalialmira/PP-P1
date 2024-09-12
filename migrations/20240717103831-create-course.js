@@ -10,9 +10,11 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       title: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       description: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       CategoryId: {
@@ -21,6 +23,9 @@ module.exports = {
           model : "Categories",
           key : "id"
         }
+      },
+      imageURL: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

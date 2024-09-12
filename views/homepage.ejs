@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlifBaa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body style="background-color: #7EAECD;">
+    <%- include('_navbar') %>
+  <!-- ========== MAIN CONTENT 1 ========== -->
+  <main style="background-color: #7EAECD;" id="content">
+    <div class="max-w-[100vw] min-h-[100vh] mx-auto pt-12 pb-10 px-4 sm:px-6 lg:px-8 md:pt-24">
+      <!-- your content goes here ... -->
+      <div class="flex items-center justify-center">
+        <div>
+            <h1 class="text-4xl font-bold mb-5">Discover Arabic <br> step by step, with our <br> friendly learning approach.</h1>
+            <a href="/register" type="button" class="border-2 border-black text-black bg-white hover:bg-[#E38054] focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">Join Now</a>
+        </div>
+        <div>
+            <img src="https://i.ibb.co.com/KXv8MYf/okeh.png" alt="" width="400px" height="400px">
+        </div>
+      </div>
+      
+    </div>
+  </main>
+  <!-- ========== MAIN CONTENT 2 ========== -->
+  <main id="courses" style="background-color: #E38054;" id="content">
+    <div class="max-w-[85rem] min-h-[75rem] mx-auto pt-12 pb-10 px-4 sm:px-6 lg:px-8 md:pt-24">
+      <!-- your content goes here ... -->
+    <div>
+        <h1 style="text-align: center;" class="text-4xl font-bold my-9 ">Our Courses</h1>
+    </div>
+
+    <!-- TOMBOL FILTER -->
+    <div class="flex items-center justify-center mb-5">
+        <a href="/#courses" type="button" class="text-black border-2 border-black bg-white hover:bg-[#7EAECD] focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">All</a>
+        <a href="/?level=beginner#courses" type="button" class="text-black border-2 border-black bg-white hover:bg-[#7EAECD] focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">Beginner</a>
+        <a href="/?level=intermediate#courses" type="button" class="text-black border-2 border-black bg-white hover:bg-[#7EAECD] focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">Intermediate</a>
+        <a href="/?level=advanced#courses" type="button" class="text-black border-2 border-black bg-white hover:bg-[#7EAECD] focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">Advanced</a>
+    </div>
+
+    <!-- CARD COURSE -->
+    <div class="grid grid-cols-3 gap-4">
+        <% courses.forEach(el  => { %>
+            <div class="flex flex-col bg-white border rounded-xl border-2 border-black">
+                <img class="w-full h-auto rounded-t-xl" src="<%= el.imageURL %>" alt="Image Description">
+                <div class="p-4 md:p-5">
+                  <h3 class="text-lg font-bold text-gray-800 ">
+                    <%= el.title %>
+                  </h3>
+                  <a class="border-2 border-black mt-2 py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg bg-[#7CA66E] text-black hover:bg-white disabled:opacity-50 disabled:pointer-events-none" href="/login">
+                    Join
+                  </a>
+                </div>
+              </div>
+            
+        <% }); %>
+          
+    </div>
+
+
+    </div>
+  </main>
+    
+</body>
+</html>
